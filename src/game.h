@@ -1,0 +1,39 @@
+#ifndef GAME_H_INCLUDED
+#define GAME_H_INCLUDED
+
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <deque>
+#include <vector>
+#include <fstream>
+#include "Core/window.h"
+#include "bloon.h"
+
+struct Point
+{
+    int x;
+    int y;
+};
+
+class Game
+{
+    public:
+        Game();
+        ~Game();
+        void mainLoop();
+        void processEvents();
+        void Affiche();
+        void Lecture();
+        void loadMap(std::string file);
+
+    private:
+        SDL_Event m_event;
+        int m_vague, m_nbbloon, m_inter;
+        int m_dernier;
+        float m_avancement;
+        Window m_window;
+        std::deque<Bloon*> m_bloon;
+        std::vector<Point> m_path;
+};
+
+#endif // GAME_H_INCLUDED
