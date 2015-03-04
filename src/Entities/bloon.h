@@ -6,8 +6,8 @@
 #include <cmath>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include "Core/entity.h"
-#include "Core/utils.h"
+#include "../Core/entity.h"
+#include "../Core/utils.h"
 
 class Bloon: public Entity {
 
