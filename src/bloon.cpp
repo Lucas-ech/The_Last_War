@@ -1,10 +1,6 @@
 #include "bloon.h"
 
 Bloon::Bloon(): Entity(), m_progression(0), m_speed(1) {
-	m_position.x = 0;
-	m_position.y = 0;
-	m_position.w = 0;
-	m_position.h = 0;
 	m_dstrect.w = m_dstrect.h = 45;
 	m_dstrect.x = m_dstrect.y = 10;
 	m_surface = IMG_Load("images/bloon_4.png");
@@ -16,7 +12,7 @@ Bloon::Bloon(): Entity(), m_progression(0), m_speed(1) {
 Bloon::~Bloon() {
 }
 
-void Bloon::setPosition(int x, int y) {
+void Bloon::setPosition(float x, float y) {
 	m_dstrect.x = x;
 	m_dstrect.y = y;
 }

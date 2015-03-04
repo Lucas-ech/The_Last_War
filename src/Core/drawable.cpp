@@ -17,3 +17,7 @@ void Drawable::draw(SDL_Surface *screen) {
 	}
 	SDL_BlitSurface(m_surface, NULL, screen, &m_dstrect);
 }
+
+const SDL_Rect& Drawable::getCoordinates() {
+	return m_dstrect;
+}

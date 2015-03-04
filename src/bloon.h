@@ -14,12 +14,11 @@ class Bloon: public Entity {
 	public:
 		Bloon();
 		virtual ~Bloon();
-		void setPosition(int x, int y);
+		void setPosition(float x, float y);
 		void update();
 		float getProgression();
 
 	private:
-		SDL_Rect m_position;
     	int m_vie;
     	int m_speed;
     	float m_progression;

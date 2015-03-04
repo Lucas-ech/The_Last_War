@@ -10,6 +10,7 @@ class Drawable {
 		Drawable();
 		virtual ~Drawable();
 		void draw(SDL_Surface *screen);
+		const SDL_Rect& getCoordinates();
 
 	protected:
 		SDL_Surface *m_surface;

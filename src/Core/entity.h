@@ -8,6 +8,7 @@ class Entity: public Drawable {
 	public:
 		Entity();
 		virtual ~Entity();
+		bool isColliding(Entity *entity);
 
 	private:
 
