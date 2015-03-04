@@ -6,10 +6,10 @@
 #include <cmath>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include "Core/drawable.h"
+#include "Core/entity.h"
 #include "Core/utils.h"
 
-class Bloon: public Drawable {
+class Bloon: public Entity {
 
 	public:
 		Bloon();

@@ -1,6 +1,6 @@
 #include "bloon.h"
 
-Bloon::Bloon(): Drawable(), m_progression(0), m_speed(1) {
+Bloon::Bloon(): Entity(), m_progression(0), m_speed(1) {
 	m_position.x = 0;
 	m_position.y = 0;
 	m_position.w = 0;
