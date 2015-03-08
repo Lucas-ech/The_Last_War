@@ -29,8 +29,6 @@ class Game
     private:
         SDL_Event m_event;
         int m_vague, m_nbbloon, m_inter;
-        int m_dernier;
-        float m_avancement;
         Window m_window;
         std::deque<Bloon*> m_bloon;
         std::vector<Point> m_path;

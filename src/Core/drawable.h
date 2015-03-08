@@ -9,7 +9,8 @@ class Drawable {
 	public:
 		Drawable();
 		virtual ~Drawable();
-		void draw(SDL_Surface *screen);
+		virtual void draw(SDL_Surface *screen);
+		void setPosition(int x, int y);
 		const SDL_Rect& getCoordinates();
 
 	protected:

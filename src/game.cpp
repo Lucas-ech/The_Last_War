@@ -2,7 +2,6 @@
 
 Game::Game(): m_window()
 {
-    m_avancement = 0;
     m_vague = 0;
     m_nbbloon = 0;
     m_inter = 0;
@@ -11,14 +10,14 @@ Game::Game(): m_window()
 Game::~Game()
 {
     while(m_bloon.size() > 0) {
+        delete m_bloon.front();
         m_bloon.pop_front();
     }
 }
 
 
 void Game::mainLoop() {
-    //const float framerate = 1000/60;
-    const float framerate = 1000/40;
+    const float framerate = 1000/60;
     Uint32 beginLoop = 0, elapsedTime = 0;
 
     SDL_Surface *carte = IMG_Load("images/level1/map.png");
@@ -41,6 +40,8 @@ void Game::mainLoop() {
             SDL_Delay(framerate - elapsedTime);
         }
     }
+
+    SDL_FreeSurface(carte);
 }
 
 void Game::processEvents() {
@@ -64,10 +65,10 @@ void Game::Lecture()
         std::cerr << "Level can't be loaded" << std::endl;
         return;
     }
-    fscanf(fichier, "%d", &m_vague);
-    fscanf(fichier, "%d", &m_nbbloon);
-    fscanf(fichier, "%d", &m_inter);
-    for(int i(1) ; i < m_nbbloon ; i++)
+    fscanf(fichier, "%10d", &m_vague);
+    fscanf(fichier, "%10d", &m_nbbloon);
+    fscanf(fichier, "%10d", &m_inter);
+    for(int i = 0 ; i < m_nbbloon ; ++i)
     {
         m_bloon.push_back(new Bloon());
     }
@@ -80,14 +81,14 @@ void Game::Affiche()
     float progression;
     int lowCase;
     float between, position;
-    float xMoving, yMoving;
-    for(int i(0); i < m_bloon.size(); ++i)
+    int xMoving, yMoving;
+    for(unsigned int i = 0; i < m_bloon.size(); ++i)
     {
         progression = m_bloon[i]->getProgression();
 
-        position = progression*m_path.size();
+        position = progression * m_path.size();
 
-        lowCase = floor(position);
+        lowCase = static_cast<int>(floor(position));
         between = position - lowCase;
 
         xMoving = intcmp(m_path[lowCase+1].x, m_path[lowCase].x);
@@ -115,9 +116,7 @@ void Game::loadMap(std::string file) {
         if(fp.eof()) {
             break;
         }
-        std::cout << "(" << x << "; " << y << ")" << std::endl;
         m_path.push_back({x, y});
-        //m_avancement = 0;
     }
 
     fp.close();
