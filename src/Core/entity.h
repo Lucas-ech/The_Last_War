@@ -13,6 +13,7 @@ class Entity: public Drawable {
 		bool isColliding(Entity *entity);
 		bool isNearOf(Entity *entity, int radius);
 		bool isOutOfScreen();
+		void rotateTowards(Entity *entity);
 		virtual void update() = 0;
 
 	private:

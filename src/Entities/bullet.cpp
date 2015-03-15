@@ -2,7 +2,7 @@
 
 Bullet::Bullet(): Entity() {
 	m_dstrect.x = m_dstrect.y = 0;
-	m_surface = Image::load("images/bullet_1.png", &m_dstrect);
+	setSurface(Image::load("images/bullet_1.png", &m_dstrect));
 }
 
 Bullet::~Bullet() {

@@ -2,9 +2,6 @@
 
 int main ( int argc, char** argv )
 {
-    // load an image
-    SDL_Surface* carte = IMG_Load("images/grass_1.png");
-
     Game game;
     game.Lecture();
     game.loadMap("grassland");

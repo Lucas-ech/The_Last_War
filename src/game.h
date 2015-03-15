@@ -6,8 +6,10 @@
 #include <deque>
 #include <vector>
 #include <fstream>
+#include <cmath>
 #include "Core/window.h"
 #include "Entities/bloon.h"
+#include "Entities/tower.h"
 
 struct Point
 {
@@ -22,7 +24,7 @@ class Game
         ~Game();
         void mainLoop();
         void processEvents();
-        void Affiche();
+        void drawAll();
         void Lecture();
         void loadMap(std::string file);
 

@@ -2,7 +2,7 @@
 
 Bloon::Bloon(): Entity(), m_life(5), m_speed(1), m_progression(0) {
 	m_dstrect.x = m_dstrect.y = 0;
-	m_surface = Image::load("images/bloon_4.png", &m_dstrect);
+	setSurface(Image::load("images/bloon_4.png", &m_dstrect));
 }
 
 Bloon::~Bloon() {

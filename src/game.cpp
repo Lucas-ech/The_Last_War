@@ -30,7 +30,7 @@ void Game::mainLoop() {
 
         m_window.blit(carte, NULL, NULL);
 
-        Affiche();
+        drawAll();
 
         // Updating the screen
         m_window.flip();
@@ -76,7 +76,7 @@ void Game::Lecture()
     fclose(fichier);
 }
 
-void Game::Affiche()
+void Game::drawAll()
 {
     float progression;
     int lowCase;
@@ -94,7 +94,10 @@ void Game::Affiche()
         xMoving = intcmp(m_path[lowCase+1].x, m_path[lowCase].x);
         yMoving = intcmp(m_path[lowCase+1].y, m_path[lowCase].y);
 
-        m_bloon[i]->setPosition(60*(m_path[lowCase].x+(between)*xMoving), 60*(m_path[lowCase].y+(between)*yMoving));
+        m_bloon[i]->setPosition(
+            60*(m_path[lowCase].x+(between)*xMoving)+m_bloon[i]->getWidth()/2,
+            60*(m_path[lowCase].y+(between)*yMoving)+m_bloon[i]->getHeight()/2
+        );
         m_window.draw(m_bloon[i]);
         m_bloon[i]->update();
     }
