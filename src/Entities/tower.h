@@ -7,6 +7,7 @@
 #include <SDL/SDL_gfxPrimitives.h>
 #include "../Core/entity.h"
 #include "../Core/image.h"
+#include "../Entities/bloon.h"
 #include "../Entities/bullet.h"
 
 class Tower: public Entity {
@@ -17,6 +18,7 @@ class Tower: public Entity {
 		void draw(SDL_Surface *screen);
 		void drawRange(SDL_Surface *screen);
 		void update();
+		void shoot(Bloon *bloon);
 
 	private:
 		float m_shotFrequency;
