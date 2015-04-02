@@ -16,14 +16,17 @@ class Drawable {
 		SDL_Rect getCoordinates();
 		Uint16 getWidth() const;
 		Uint16 getHeight() const;
+		int getAngle() const;
 
 	protected:
 		void setSurface(SDL_Surface *surface);
 		SDL_Rect m_pos;
 		SDL_Rect m_srcrect;
 		SDL_Rect m_dstrect;
+		float m_x, m_y;
  		SDL_Surface *m_surface;
 		SDL_Surface *m_orgSurface;
+		int m_angle;
 };
 
 #endif //DRAWABLE_H

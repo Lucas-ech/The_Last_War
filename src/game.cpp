@@ -17,10 +17,19 @@ Game::~Game()
 
 
 void Game::mainLoop() {
-    const float framerate = 1000/60;
+    const float framerate = 1000/30;
     Uint32 beginLoop = 0, elapsedTime = 0;
 
     SDL_Surface *carte = IMG_Load("images/level1/map.png");
+
+    m_tower.push_back(new Tower());
+    m_tower.back()->setPosition(200, 250);
+    m_tower.push_back(new Tower());
+    m_tower.back()->setPosition(250, 400);
+    m_tower.push_back(new Tower());
+    m_tower.back()->setPosition(350, 50);
+    m_tower.push_back(new Tower());
+    m_tower.back()->setPosition(450, 282);
 
     while (!m_window.isDone())
     {
@@ -29,6 +38,22 @@ void Game::mainLoop() {
         processEvents();
 
         m_window.blit(carte, NULL, NULL);
+
+        for(unsigned int i = 0; i < m_bloon.size(); ++i) {
+            for(unsigned int j = 0; j < m_tower.size(); ++j) {
+                if(m_tower[j]->isNearOf(m_bloon[i], 150)) {
+                    m_tower[j]->rotateTowards(m_bloon[i]);
+                    m_tower[j]->shoot(m_bloon[i]);
+                    if(!m_bloon[i]->isAlive()) {
+                        delete m_bloon[i];
+                        m_bloon.erase(m_bloon.begin() + i);
+                    }
+                }
+            }
+        }
+
+        /*m_tower[0]->rotate(45);
+        m_tower[0]->shoot(m_bloon[0]);*/
 
         drawAll();
 
@@ -100,6 +125,12 @@ void Game::drawAll()
         );
         m_window.draw(m_bloon[i]);
         m_bloon[i]->update();
+    }
+
+    for(unsigned int i = 0; i < m_tower.size(); ++i)
+    {
+        m_window.draw(m_tower[i]);
+        m_tower[i]->update();
     }
 }
 

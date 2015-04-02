@@ -33,6 +33,7 @@ class Game
         int m_vague, m_nbbloon, m_inter;
         Window m_window;
         std::deque<Bloon*> m_bloon;
+        std::deque<Tower*> m_tower;
         std::vector<Point> m_path;
 };
 

@@ -1,10 +1,13 @@
 #include "image.h"
 
 SDL_Surface* Image::load(char *path, SDL_Rect *coord) {
-	SDL_Surface *surface = IMG_Load(path);
-	if(surface == NULL) {
+	SDL_Surface *surface, *optimizated;
+	surface = IMG_Load(path);
+    if(surface == NULL) {
 		throw std::runtime_error("Image non trouvée");
 	}
+	optimizated = SDL_DisplayFormatAlpha(surface);
+	SDL_FreeSurface(surface);
 
 	std::ifstream fp;
 	fp.open(path, std::ios::binary);
@@ -19,7 +22,7 @@ SDL_Surface* Image::load(char *path, SDL_Rect *coord) {
 
 
 	}
-	return surface;
+	return optimizated;
 }
 
 Type Image::getImageType(std::ifstream &fp) {
