@@ -23,7 +23,6 @@ class Drawable {
 		SDL_Rect m_pos;
 		SDL_Rect m_srcrect;
 		SDL_Rect m_dstrect;
-		float m_x, m_y;
  		SDL_Surface *m_surface;
 		SDL_Surface *m_orgSurface;
 		int m_angle;

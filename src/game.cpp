@@ -31,6 +31,8 @@ void Game::mainLoop() {
     m_tower.push_back(new Tower());
     m_tower.back()->setPosition(450, 282);
 
+    TowerBar towerBar;
+
     while (!m_window.isDone())
     {
         beginLoop = SDL_GetTicks();
@@ -52,10 +54,8 @@ void Game::mainLoop() {
             }
         }
 
-        /*m_tower[0]->rotate(45);
-        m_tower[0]->shoot(m_bloon[0]);*/
-
         drawAll();
+        m_window.draw(&towerBar);
 
         // Updating the screen
         m_window.flip();
@@ -150,7 +150,10 @@ void Game::loadMap(std::string file) {
         if(fp.eof()) {
             break;
         }
-        m_path.push_back({x, y});
+        Point a;
+        a.x =x;
+        a.y = y;
+        m_path.push_back(a);
     }
 
     fp.close();

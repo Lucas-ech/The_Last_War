@@ -15,6 +15,7 @@ class Image {
 
 	public:
 		static SDL_Surface* load(char *path, SDL_Rect *coord);
+		static SDL_Surface* load(char *path);
 
 	private:
 		static Type getImageType(std::ifstream &fp);

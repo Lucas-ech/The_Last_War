@@ -10,6 +10,7 @@
 #include "Core/window.h"
 #include "Entities/bloon.h"
 #include "Entities/tower.h"
+#include "Gui/towerBar.h"
 
 struct Point
 {

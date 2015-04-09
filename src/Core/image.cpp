@@ -9,20 +9,23 @@ SDL_Surface* Image::load(char *path, SDL_Rect *coord) {
 	optimizated = SDL_DisplayFormatAlpha(surface);
 	SDL_FreeSurface(surface);
 
-	std::ifstream fp;
-	fp.open(path, std::ios::binary);
+    if(coord != NULL) {
+        std::ifstream fp;
+        fp.open(path, std::ios::binary);
 
+        if(getImageType(fp) == PNG) {
+            // On place le curseur à l'endroit où les dimensions sont présentes
+            fp.seekg(16);
 
-	if(getImageType(fp) == PNG) {
-		// On place le curseur à l'endroit où les dimensions sont présentes
-		fp.seekg(16);
-
-		coord->w = fp.get() << 24 | fp.get() << 16 | fp.get() << 8 | fp.get();
-		coord->h = fp.get() << 24 | fp.get() << 16 | fp.get() << 8 | fp.get();
-
-
+            coord->w = fp.get() << 24 | fp.get() << 16 | fp.get() << 8 | fp.get();
+            coord->h = fp.get() << 24 | fp.get() << 16 | fp.get() << 8 | fp.get();
+        }
 	}
 	return optimizated;
+}
+
+SDL_Surface* Image::load(char *path) {
+	load(path, NULL);
 }
 
 Type Image::getImageType(std::ifstream &fp) {

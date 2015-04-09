@@ -11,8 +11,8 @@ Bullet::~Bullet() {
 
 void Bullet::update() {
 	//std::cout << "(" << m_direction.x << "; " << m_direction.y << ")" << std::endl;
-	m_x += m_direction.x;
-	m_y += m_direction.y;
+	m_dstrect.x += m_direction.x;
+	m_dstrect.y += m_direction.y;
 }
 
 void Bullet::setDirection(float x, float y) {

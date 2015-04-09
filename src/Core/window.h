@@ -16,7 +16,7 @@ class Window {
 		void blit(SDL_Surface *src, SDL_Rect *srcrect, SDL_Rect *dstrect);
 		void flip();
 		bool isDone();
-		static const int WIDTH = 840;
+		static const int WIDTH = 940;
 		static const int HEIGHT = 600;
 
 	private:
