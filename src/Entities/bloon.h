@@ -4,10 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
 #include "../Core/entity.h"
-#include "../Core/image.h"
 #include "../Core/utils.h"
 
 class Bloon: public Entity {

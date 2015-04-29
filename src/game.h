@@ -1,14 +1,13 @@
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 #include <deque>
 #include <vector>
+#include <iostream>
 #include <fstream>
 #include <cmath>
-#include "Core/window.h"
-#include "Entities/bloon.h"
 #include "Entities/tower.h"
 
 struct Point
@@ -29,10 +28,12 @@ class Game
         void loadMap(std::string file);
 
     private:
-        SDL_Event m_event;
-        int m_vague, m_nbbloon, m_inter;
-        Window m_window;
-        std::deque<Bloon*> m_bloon;
+        int m_money;
+        sf::RenderWindow m_window;
+        sf::Event m_windowEvent;
+        sf::Sprite m_map;
+        sf::Sprite m_towerBar;
+        //std::deque<Bloon*> m_bloon;
         std::deque<Tower*> m_tower;
         std::vector<Point> m_path;
 };
