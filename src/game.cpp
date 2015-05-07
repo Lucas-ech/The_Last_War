@@ -7,6 +7,7 @@ Game::Game(): m_money(0), m_window(sf::VideoMode(940, 600), "The Last War")
 
 Game::~Game()
 {
+    delete m_towerBar;
     /*while(m_bloon.size() > 0) {
         delete m_bloon.front();
         m_bloon.pop_front();
@@ -16,19 +17,22 @@ Game::~Game()
 
 void Game::mainLoop() {
 
+    Interaction interaction;
+
+    m_textureHolder.load(Textures::TowerBar, "images/TowerBar.png");
+    m_textureHolder.load(Textures::Tower, "images/tower_1.png");
+
     sf::Texture mapTexture;
     mapTexture.loadFromFile("images/level1/map.png");
     m_map.setTexture(mapTexture);
 
-    sf::Texture towerBarTexture;
-    towerBarTexture.loadFromFile("images/TowerBar.png");
-    m_towerBar.setTexture(towerBarTexture);
-    m_towerBar.setPosition(840, 0);
+    m_towerBar = new TowerBar(m_textureHolder);
+    m_towerBar->setPosition(1140, 50);
 
-    m_tower.push_back(new Tower());
+    m_tower.push_back(new Tower(m_textureHolder));
     m_tower.back()->setPosition(200, 200);
 
-    m_tower.push_back(new Tower());
+    m_tower.push_back(new Tower(m_textureHolder));
     m_tower.back()->setPosition(45, 80);
 
     m_tower[0]->rotateTowards(m_tower[1]);
@@ -36,7 +40,19 @@ void Game::mainLoop() {
 
     while (m_window.isOpen()) {
         processEvents();
+        m_towerBar->update(&interaction);
         drawAll();
+        if(interaction.isSelectedTower()) {
+            sf::Vector2i mousePos = sf::Mouse::getPosition();
+            Tower *tower = interaction.getSelectedTower();
+            tower->setPosition(mousePos.x, mousePos.y);
+            m_window.draw(*tower);
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && mousePos.x < 840) {
+                interaction.releaseSelectedTower();
+                m_tower.push_back(tower);
+            }
+        }
+        m_window.display();
     }
 }
 
@@ -56,24 +72,16 @@ void Game::processEvents() {
     }
 }
 
-void Game::Lecture()
-{
-}
-
 void Game::drawAll()
 {
     m_window.draw(m_map);
-    m_window.draw(m_towerBar);
+    m_window.draw(*m_towerBar);
 
     for(unsigned int i = 0; i < m_tower.size(); ++i)
     {
         m_window.draw(*m_tower[i]);
         m_tower[i]->update();
     }
-
-    // Swap buffers
-    m_window.display();
-
 
 }
 
@@ -94,7 +102,7 @@ void Game::loadMap(std::string file) {
             break;
         }
         Point a;
-        a.x =x;
+        a.x = x;
         a.y = y;
         m_path.push_back(a);
     }

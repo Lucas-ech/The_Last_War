@@ -1,12 +1,10 @@
 #include "tower.h"
 
-Tower::Tower(): Entity(), m_shotFrequency(1000), m_range(60) {
+Tower::Tower(const TextureHolder& textureHolder): Entity(), m_shotFrequency(1000), m_range(60) {
 	//m_dstrect.x = m_dstrect.y = 0;
 	//setSurface(Image::load("images/tower_1.png", &m_dstrect));
 	//TODO: Fuite de mémoire
-	sf::Texture *tower = new sf::Texture;
-    tower->loadFromFile("images/tower_1.png");
-    setTexture(*tower);
+    setTexture(textureHolder.get(Textures::Tower));
 }
 
 Tower::~Tower() {

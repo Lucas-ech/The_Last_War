@@ -8,7 +8,7 @@ Entity::~Entity() {
 
 }
 
-void Entity::setTexture(sf::Texture &texture) {
+void Entity::setTexture(const sf::Texture &texture) {
 	m_sprite = sf::Sprite(texture);
 	sf::FloatRect size = m_sprite.getGlobalBounds();
 	setOrigin(size.height/2, size.width/2);
@@ -19,10 +19,18 @@ void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	target.draw(m_sprite, states);
 }
 
-bool Entity::isColliding(Entity *entity) {
+bool Entity::isColliding(Entity *entity) const {
 	const sf::Vector2f pos1 = getPosition();
 	const sf::Vector2f pos2 = entity->getPosition();
 	if(pos2.x >= pos1.x && pos2.x <= pos1.x && pos2.y >= pos1.y && pos2.y <= pos1.x) {
+		return true;
+	}
+	return false;
+}
+
+bool Entity::isColliding(int x, int y) const {
+	const sf::Vector2f pos = getPosition();
+	if(x >= pos.x && x <= pos.x && y >= pos.y && y <= pos.x) {
 		return true;
 	}
 	return false;
@@ -59,4 +67,14 @@ void Entity::rotateTowards(Entity *entity) {
         angle *= -1;
     }
     setRotation(angle);
+}
+
+bool Entity::isMouseClicked() const {
+	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		sf::Vector2i mousePos = sf::Mouse::getPosition();
+		if(isColliding(mousePos.x, mousePos.y)) {
+			return true;
+		}
+	}
+	return false;
 }

@@ -3,7 +3,6 @@
 int main ( int argc, char** argv )
 {
     Game game;
-    game.Lecture();
     //game.loadMap("grassland");
     try {
         game.mainLoop();
@@ -12,7 +11,6 @@ int main ( int argc, char** argv )
         std::cerr << e.what() << '\n';
     }
 
-    // all is well ;)
     printf("Exited cleanly\n");
     return 0;
 }

@@ -5,6 +5,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "../Core/resourceholder.h"
+#include "../resourceidentifiers.h"
 #include "../Core/entity.h"
 #include "../Entities/bloon.h"
 #include "../Entities/bullet.h"
@@ -12,7 +14,7 @@
 class Tower: public Entity {
 
 	public:
-		Tower();
+		Tower(const TextureHolder& textureHolder);
 		virtual ~Tower();
 		void update();
 		void shoot(Bloon *bloon);
